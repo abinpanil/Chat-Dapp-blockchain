@@ -1,0 +1,103 @@
+/* Navbar container */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  color: white;
+}
+
+/* Logo on the left */
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+}
+
+/* Right section for nav items and button */
+.navRight {
+  display: flex;
+  align-items: center;
+}
+
+/* Navigation links container */
+.navLinks {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Individual nav items */
+.navItem {
+  margin: 0 1rem;
+  cursor: pointer;
+}
+
+/* Nav links styling */
+.navItem a {
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s;
+}
+
+/* Nav link hover effect */
+.navItem:hover a {
+  color: #00bcd4;
+}
+
+/* Active nav link styling */
+.active a {
+  color: #00bcd4;
+  font-weight: bold;
+  border-bottom: 2px solid #00bcd4;
+}
+
+/* Connect button styling */
+.connectButton {
+  background-color: #00bcd4;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 50px; /* Fully rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  margin-left: 1rem; /* Space between button and links */
+}
+
+/* Connect button hover effect */
+.connectButton:hover {
+  background-color: #0199a6;
+  transform: scale(1.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navRight {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 1rem;
+  }
+
+  .connectButton {
+    margin-left: 0;
+    margin-top: 0.5rem;
+    width: 100%; /* Full-width button for smaller screens */
+  }
+
+  .navLinks {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navItem {
+    margin: 0.5rem 0;
+  }
+}
