@@ -5,5 +5,6 @@ import Friend from "./Friend/Friend";
 import Loader from "./Loader/Loader";
 import Model from "./Model/Model";
 import UserCard from "./UserCard/UserCard";
+import Footer from "./Footer/Footer";
 
-export { Navbar, Error, Filter, Friend, Loader, Model, UserCard }
+export { Navbar, Error, Filter, Friend, Loader, Model, UserCard, Footer }

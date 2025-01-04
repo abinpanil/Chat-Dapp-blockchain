@@ -1,4 +1,4 @@
-import { Navbar } from "@/Components";
+import { Footer, Navbar } from "@/Components";
 import { ChatAppProvider } from "@/Context/ChatAppContext";
 import { handleNetworkSwitch } from "@/Context/constant";
 import "@/styles/globals.css";
@@ -14,5 +14,6 @@ export default function App({ Component, pageProps }) {
     <div className="container">
       <Component {...pageProps} />
     </div>
+    <Footer />
   </ChatAppProvider>
 }

@@ -33,22 +33,8 @@ const Navbar = () => {
 
   return (<>
     <nav className={styles.navbar}>
-      <div className={styles.logo}>MyApp</div>
+      <Link className={styles.logo} href={'/'}>BlockChat</Link>
       <div className={styles.navRight}>
-        <ul className={styles.navLinks}>
-          {navMenuItems.map((item, i) => {
-            return (
-              <li
-                key={i + 1}
-                className={`${styles.navItem} ${active === i + 1 ? styles.active : ''
-                  }`}
-                onClick={() => { setActive(i + 1) }}
-              >
-                <Link href={item.link}>{item.menu}</Link>
-              </li>
-            )
-          })}
-        </ul>
         {!userName ?
           <button
             onClick={() => account === "" ? connectToWallet() : setOpenModel(true)}

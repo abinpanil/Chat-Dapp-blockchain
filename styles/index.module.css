@@ -1,0 +1,77 @@
+.container {
+  background-color: rgb(10, 18, 57);
+  color: white;
+  min-height: calc(100vh - 100px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+}
+
+.header {
+  max-width: 800px;
+  padding: 20px;
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+}
+
+.title {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: rgb(248, 53, 79);
+  letter-spacing: 5px;
+  font-weight: 450;
+}
+
+.subheading {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 3px;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.buttonPrimary,
+.buttonSecondary {
+  padding: 15px 25px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+
+.buttonPrimary {
+  background-color: rgb(248, 53, 79);
+  color: white;
+  box-shadow: 0px 4px 12px rgba(248, 53, 79, 0.4);
+}
+
+.buttonPrimary:hover {
+  background-color: white;
+  color: rgb(248, 53, 79);
+  box-shadow: 0px 4px 20px rgba(248, 53, 79, 0.6);
+  letter-spacing: 3px;
+}
+
+.buttonSecondary {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(248, 53, 79, 0.8);
+}
+
+.buttonSecondary:hover {
+  background-color: white;
+  color: rgb(248, 53, 79);
+  box-shadow: 0px 4px 20px rgba(248, 53, 79, 0.6);
+  letter-spacing: 3px;
+}

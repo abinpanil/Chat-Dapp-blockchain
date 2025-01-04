@@ -36,7 +36,6 @@ export const ChatAppProvider = ({ children }) => {
             setFiendList(friendList)
 
             const userList = await contract.getAllAppUsers()
-            console.log(userList)
             setUserLists(userList)
 
         } catch (error) {
@@ -50,6 +49,7 @@ export const ChatAppProvider = ({ children }) => {
             const contract = await connectingWithContract()
             const read = await contract.readMessage(friendAddress)
             setFriendMsg(read)
+
         } catch (error) {
             console.log(error)
             setToast({ show: true, type: ERROR_TOAST, message: "Currently you have no message" })
@@ -58,7 +58,6 @@ export const ChatAppProvider = ({ children }) => {
 
     const createAccount = async ({ name, accountAddress }) => {
         try {
-            console.log({ name, accountAddress })
             if (!name || !accountAddress) return setToast({ show: true, type: ERROR_TOAST, message: 'Please fill all fields' })
             setLoading(true)
             const contract = await connectingWithContract()
@@ -76,7 +75,7 @@ export const ChatAppProvider = ({ children }) => {
 
     const addFriend = async ({ name, accountAddress }) => {
         try {
-            if (!name || !accountAddress) return setError("Fields cannot empty")
+            if (!name || !accountAddress) return setToast({ show: true, type: ERROR_TOAST, message: "Fields cannot empty" })
 
             setLoading(true)
             const contract = await connectingWithContract()
@@ -93,7 +92,7 @@ export const ChatAppProvider = ({ children }) => {
 
     const sendMsg = async ({ msg, address }) => {
         try {
-            if (!msg || !accountAddress) return setError("Fields cannot empty")
+            if (!msg || !address) return setToast({ show: true, type: ERROR_TOAST, message: "Fields cannot empty" })
 
             const contract = await connectingWithContract()
             const addMsg = await contract.sendMessage(address, msg)

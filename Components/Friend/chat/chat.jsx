@@ -1,21 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './chat.module.css'
 
-function chat({ friend }) {
-    const [messages, setMessages] = useState([
-        { id: 1, text: "Hey there!", sender: "friend" },
-        { id: 2, text: "Hello! How are you?", sender: "me" },
-        { id: 3, text: "I'm good, thanks for asking!", sender: "friend" },
-    ]);
+function chat({ friend, message, sendMsg, account }) {
+    const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
-
     const handleSendMessage = (e) => {
         e.preventDefault();
         if (newMessage.trim() !== "") {
-            setMessages([...messages, { id: Date.now(), text: newMessage, sender: "me" }]);
+            sendMsg({ msg: newMessage, address: friend?.pubkey })
             setNewMessage("");
         }
     };
+
+    useEffect(() => {
+        setMessages(message)
+    }, [message])
+
 
     return (
         <div className={styles.chatContainer}>
@@ -34,15 +34,14 @@ function chat({ friend }) {
                     </div>
 
                     <div className={styles.chatArea}>
-                        {messages.map((msg) => (
-                            <div
-                                key={msg.id}
-                                className={`${styles.message} ${msg.sender === "me" ? styles.myMessage : styles.friendMessage
-                                    }`}
+                        {messages.map((msg, i) => {
+                            return <div
+                                key={i + 1}
+                                className={`${styles.message} ${msg?.sender.toLowerCase() != account.toLowerCase() ? styles.friendMessage : styles.myMessage}`}
                             >
-                                {msg.text}
+                                {msg.msg}
                             </div>
-                        ))}
+                        })}
                     </div>
 
                     <form className={styles.inputArea} onSubmit={handleSendMessage}>

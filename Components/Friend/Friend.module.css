@@ -3,7 +3,6 @@
   justify-content: space-between;
   gap: 20px;
   padding: 2rem;
-  background-color: #292f3f;
   height: 84vh;
 }
 
@@ -67,7 +66,6 @@
 
 .chatContainer {
   width: 65%;
-  background-color: #292f3f;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   flex-grow: 1;

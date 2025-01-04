@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import styles from './list.module.css'
 
 function list({ friends, setSelectedFriend }) {
-    console.log(friends)
     const [searchQuery, setSearchQuery] = useState("");
     const [filteredFriends, setFilteredFriends] = useState(friends)
 
