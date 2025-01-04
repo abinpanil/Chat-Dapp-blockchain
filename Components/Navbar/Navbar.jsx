@@ -1,5 +1,4 @@
-import React, { useContext, useState } from 'react'
-import Image from 'next/image'
+import React, { useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 import styles from "./Navbar.module.css"
 import { ChatAppContext } from '@/Context/ChatAppContext'
@@ -11,10 +10,26 @@ import Toast from '../Toast/Toast'
 const Navbar = () => {
 
   const [active, setActive] = useState(2)
-  const [open, setOpen] = useState(false)
   const [openModel, setOpenModel] = useState(false)
 
   const { account, userName, connectToWallet, createAccount, error, toast, setToast } = useContext(ChatAppContext)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const navbar = document.querySelector(`.${styles.navbar}`);
+      if (window.scrollY > 0) {
+        navbar.classList.add(styles.shadow);
+      } else {
+        navbar.classList.remove(styles.shadow);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (<>
     <nav className={styles.navbar}>
@@ -29,20 +44,23 @@ const Navbar = () => {
                   }`}
                 onClick={() => { setActive(i + 1) }}
               >
-                <a href={item.link}>{item.menu}</a>
+                <Link href={item.link}>{item.menu}</Link>
               </li>
             )
           })}
         </ul>
-        {account === "" ?
-          <button onClick={() => connectToWallet()} className={styles.connectButton}>
+        {!userName ?
+          <button
+            onClick={() => account === "" ? connectToWallet() : setOpenModel(true)}
+            className={`${styles.button} ${account === "" ? styles.connectButton : styles.createButton}`}
+          >
             {""}
-            <span>Connect Wallet</span>
+            <span>{account === "" ? "Connect Wallet" : "Create Account"}</span>
           </button> :
-          <button onClick={() => setOpenModel(true)} className={styles.connectButton}>
-            {""}
-            <small>{userName || "Create Account"}</small>
-          </button>
+          <div className={styles.userDisplay}>
+            <span className={styles.userIcon}>👤</span>
+            <span className={styles.userName}>{userName}</span>
+          </div>
         }
       </div>
     </nav>

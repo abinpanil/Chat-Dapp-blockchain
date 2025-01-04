@@ -1,31 +1,23 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styles from './Model.module.css'
+import { ChatAppContext } from '@/Context/ChatAppContext';
 
 const Model = ({ openModel, title, functionName, address }) => {
 
   const [name, setName] = useState("");
   const [accountAddress, setAccountAddress] = useState(address || "")
-  const [isLoading, setIsLoading] = useState(false);
+  const { loading } = useContext(ChatAppContext)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    try {
-      if (functionName) {
-        await functionName({ name, accountAddress });
-      }
-    } catch (error) {
-      console.error("Error in submission:", error);
-    } finally {
-      setIsLoading(false);
-    }
+    if (functionName) functionName({ name, accountAddress });
   };
-
 
   return (
     <div className={styles.modal}>
       <div className={styles.modalContent}>
         <h2 className={styles.title}>{title}</h2>
+        {loading && <p>Please wait a minute.</p>}
         <form onSubmit={handleSubmit}>
           <div className={styles.formGroup}>
             <label htmlFor="name" className={styles.label}>
@@ -39,6 +31,7 @@ const Model = ({ openModel, title, functionName, address }) => {
               className={styles.input}
               placeholder="Enter your name"
               required
+              disabled={loading}
             />
           </div>
           <div className={styles.formGroup}>
@@ -52,23 +45,23 @@ const Model = ({ openModel, title, functionName, address }) => {
               onChange={(e) => setAccountAddress(e.target.value)}
               className={`${styles.input} ${address ? styles.disabledInput : ''}`}
               placeholder={address || 'Enter address'}
-              disabled={address}
+              disabled={address || loading}
               required
             />
           </div>
           <div className={styles.buttonGroup}>
             <button
               type="submit"
-              className={`${styles.button} ${!name || !address || isLoading ? styles.disabledButton : styles.enabledButton}`}
-              disabled={!name || !address || isLoading}
+              className={`${styles.button} ${!name || !address || loading ? styles.disabledButton : styles.enabledButton}`}
+              disabled={!name || !address || loading}
             >
-              {isLoading ? <span className={styles.spinner}></span> : "Submit"}
+              {loading ? <span className={styles.spinner}></span> : "Submit"}
             </button>
             <button
               type="button"
-              className={`${styles.cancelButton} ${isLoading ? styles.disabledButton : ''}`}
+              className={`${styles.cancelButton} ${loading ? styles.disabledButton : ''}`}
               onClick={() => openModel(false)}
-              disabled={isLoading}>
+              disabled={loading}>
               Cancel
             </button>
           </div>

@@ -1,0 +1,61 @@
+.searchContainer {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    max-width: 400px; /* Adjust width as needed */
+    padding: 0.5rem;
+    background-color: #292f3f; /* Matches app background */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    position: relative;
+    left: 0; /* Positions the component on the left */
+  }
+  
+  .searchInput {
+    flex-grow: 1;
+    padding: 0.5rem;
+    border: 1px solid #a8b3cf;
+    border-radius: 6px;
+    background-color: #1f2636;
+    color: #ffffff;
+    font-size: 1rem;
+    outline: none;
+  }
+  
+  .searchInput::placeholder {
+    color: #a8b3cf;
+  }
+  
+  .button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .searchButton {
+    background-color: #ffa500; /* Search button color */
+    color: #292f3f;
+  }
+  
+  .searchButton:disabled {
+    background-color: #665e4a; /* Disabled search button color */
+    cursor: not-allowed;
+  }
+  
+  .clearButton {
+    background-color: #a8b3cf; /* Clear button color */
+    color: #292f3f;
+  }
+  
+  .clearButton:disabled {
+    background-color: #5a6172; /* Disabled clear button color */
+    cursor: not-allowed;
+  }
+  
+  .button:hover:not(:disabled) {
+    filter: brightness(1.2);
+  }
+  

@@ -33,6 +33,8 @@ contract ChatApp {
         return bytes(userList[pubkey].name).length > 0;
     }
 
+    event UserCreated(string name, address indexed userAddress);
+
     //create account
     function createAccount(string calldata name) external {
         require(!checkUserExist(msg.sender), "User already exists");
@@ -41,6 +43,8 @@ contract ChatApp {
         userList[msg.sender].name = name;
 
         getAllUsers.push(AllUserStruck(name, msg.sender));
+
+        emit UserCreated(name, msg.sender); // Emit event
     }
 
     //get username

@@ -1,26 +1,33 @@
-/* Navbar container */
 .navbar {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 1rem;
-  color: white;
+  padding: 2rem 1rem;
+  color: #fff;
+  position: fixed;
+  height: 100px;
+  background-color: #292f3f;
+  z-index: 99999;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
-/* Logo on the left */
+.navbar.shadow {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
 .logo {
   font-size: 1.8rem;
   font-weight: bold;
   color: white;
 }
 
-/* Right section for nav items and button */
 .navRight {
   display: flex;
+  gap: 2rem;
   align-items: center;
 }
 
-/* Navigation links container */
 .navLinks {
   display: flex;
   list-style: none;
@@ -28,52 +35,82 @@
   padding: 0;
 }
 
-/* Individual nav items */
 .navItem {
   margin: 0 1rem;
   cursor: pointer;
 }
 
-/* Nav links styling */
 .navItem a {
+  font-size: 1.2rem;
   text-decoration: none;
   color: white;
-  transition: color 0.3s;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+  padding-bottom: 5px;
 }
 
-/* Nav link hover effect */
 .navItem:hover a {
-  color: #00bcd4;
+  color: #a8b3cf;
 }
 
-/* Active nav link styling */
 .active a {
-  color: #00bcd4;
+  color: #ffa500;
   font-weight: bold;
-  border-bottom: 2px solid #00bcd4;
+  border-bottom: 2px solid #ffa500;
 }
 
-/* Connect button styling */
-.connectButton {
-  background-color: #00bcd4;
+.button {
   color: white;
   border: none;
   padding: 0.8rem 1.5rem;
   font-size: 1rem;
   font-weight: bold;
-  border-radius: 50px; /* Fully rounded corners */
+  border-radius: 50px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.2s;
-  margin-left: 1rem; /* Space between button and links */
+  margin-left: 1rem;
 }
 
-/* Connect button hover effect */
+.connectButton {
+  background-color: #2196f3;
+}
+
 .connectButton:hover {
-  background-color: #0199a6;
+  background-color: #1b7dcc;
   transform: scale(1.05);
 }
 
-/* Responsive adjustments */
+.createButton {
+  background-color: #ff5722;
+}
+
+.createButton:hover {
+  background-color: #a73918;
+  transform: scale(1.05);
+}
+
+.userDisplay {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  background-color: #272b35;
+  border-radius: 8px;
+  color: #ffffff;
+  transition: box-shadow 0.3s;
+  cursor: default;
+}
+
+.userIcon {
+  font-size: 1.2rem;
+  color: #b0bec5;
+}
+
+.userName {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ff5722;
+}
+
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
@@ -89,7 +126,7 @@
   .connectButton {
     margin-left: 0;
     margin-top: 0.5rem;
-    width: 100%; /* Full-width button for smaller screens */
+    width: 100%;
   }
 
   .navLinks {

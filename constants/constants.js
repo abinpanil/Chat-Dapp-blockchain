@@ -1,18 +1,13 @@
 export const navMenuItems = [
     {
         menu: "All Users",
-        link: "alluser"
+        link: "allUser"
     },
     {
         menu: "Chat",
         link: "/"
     },
-    {
-        menu: "Contact",
-        link: "/"
-    },
-    {
-        menu: "Setting",
-        link: "/"
-    },
 ]
+
+export const ERROR_TOAST = 'errorToast'
+export const SUCCESS_TOAST = 'successToast'

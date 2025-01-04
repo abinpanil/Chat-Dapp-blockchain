@@ -1,3 +1,4 @@
+import { ERROR_TOAST, SUCCESS_TOAST } from '@/constants/constants'
 import { CheckIfWalletConnected, connectingWithContract, connectToWallet } from '@/utils/apiFeature'
 import { ethers } from 'ethers'
 import { useRouter } from 'next/router'
@@ -11,9 +12,9 @@ export const ChatAppProvider = ({ children }) => {
     const [fiendList, setFiendList] = useState([])
     const [friendMsg, setFriendMsg] = useState([])
     const [loading, setLoading] = useState(false)
-    const [userList, setUserList] = useState([])
+    const [userLists, setUserLists] = useState([])
     const [error, setError] = useState(null)
-    const [toast, setToast] = useState({ show: false, type: "", message: "" })
+    const [toast, setToast] = useState({ show: false, type: '', message: "" })
     const [currentUsername, setCurrentUsername] = useState("")
     const [currentUserAddress, setCurrentUserAddress] = useState("")
 
@@ -28,18 +29,19 @@ export const ChatAppProvider = ({ children }) => {
             const contract = await connectingWithContract()
             const connectAccount = await connectToWallet()
             setAccount(connectAccount)
-            // const userName = await contract.getUserName(connectAccount)
-            // setUserName(userName)
+            const userName = await contract.getUserName(connectAccount)
+            setUserName(userName)
 
             const friendList = await contract.getMyFriendList()
             setFiendList(friendList)
 
             const userList = await contract.getAllAppUsers()
-            setUserList(userList)
+            console.log(userList)
+            setUserLists(userList)
 
         } catch (error) {
             console.log(error)
-            setError("Please install and connect your wallet")
+            if (error.reason !== 'user not fount') setError("Please install and connect your wallet")
         }
     }
 
@@ -49,23 +51,26 @@ export const ChatAppProvider = ({ children }) => {
             const read = await contract.readMessage(friendAddress)
             setFriendMsg(read)
         } catch (error) {
-            setError("Currently you have no message")
+            console.log(error)
+            setToast({ show: true, type: ERROR_TOAST, message: "Currently you have no message" })
         }
     }
 
     const createAccount = async ({ name, accountAddress }) => {
         try {
-            if (!name || !accountAddress) return setError("Fields cannot empty")
-
+            console.log({ name, accountAddress })
+            if (!name || !accountAddress) return setToast({ show: true, type: ERROR_TOAST, message: 'Please fill all fields' })
+            setLoading(true)
             const contract = await connectingWithContract()
             const getCreatedUser = await contract.createAccount(name)
-            setLoading(true)
             await getCreatedUser.wait()
             window.location.reload()
-            setLoading(false)
-
+            setToast({ show: true, type: SUCCESS_TOAST, message: 'Account created successfully' })
         } catch (error) {
-            setError("Error")
+            console.log(error)
+            setToast({ show: true, type: ERROR_TOAST, message: error?.reason || "Something went wrong" })
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -73,15 +78,16 @@ export const ChatAppProvider = ({ children }) => {
         try {
             if (!name || !accountAddress) return setError("Fields cannot empty")
 
+            setLoading(true)
             const contract = await connectingWithContract()
             const addMyFriend = await contract.addFriend(accountAddress, name)
-            setLoading(true)
             await addMyFriend.wait()
             window.location.reload()
-            setLoading(false)
-
         } catch (error) {
-            setError("Error")
+            console.log(error)
+            setToast({ show: true, type: ERROR_TOAST, message: error?.reason || "Something went wrong" })
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -94,10 +100,11 @@ export const ChatAppProvider = ({ children }) => {
             setLoading(true)
             await addMsg.wait()
             window.location.reload()
-            setLoading(false)
-
         } catch (error) {
-            setError("error")
+            console.log(error)
+            setToast({ show: true, type: ERROR_TOAST, message: error?.reason || "Something went wrong" })
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -122,7 +129,7 @@ export const ChatAppProvider = ({ children }) => {
             fiendList,
             friendMsg,
             loading,
-            userList,
+            userLists,
             error,
             currentUsername,
             currentUserAddress,
