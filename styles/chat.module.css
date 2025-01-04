@@ -1,6 +1,6 @@
 .container {
   background: linear-gradient(#0a123975, #0a1239),
-    url("../images/home_bg.jpg") center / cover no-repeat;
+    url("../images/chat_bg.jpg") center / cover no-repeat;
   padding: 20px;
   color: #f1f5f9;
   display: flex;

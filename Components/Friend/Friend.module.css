@@ -5,12 +5,13 @@
   padding: 2rem;
   height: 84vh;
   width: 75%;
+  letter-spacing: 2px;
 }
 
 .friendListContainer {
   width: 30%;
-  background-color: #3a4253;
-  border-radius: 8px;
+  background-color: #000b43a6;
+  /* border-radius: 8px; */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
