@@ -1,8 +1,13 @@
 .container {
-  background-color: #0a1239f2;
+  background: linear-gradient(#0a123975, #0a1239),
+    url("../images/home_bg.jpg") center / cover no-repeat;
   padding: 20px;
   color: #f1f5f9;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  font-family: Roboto, sans-serif;
+  max-height: calc(100vh - 60px);
+  padding-top: 130px;
+  align-items: center;
 }

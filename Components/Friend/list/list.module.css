@@ -45,8 +45,12 @@
 }
 
 .friendCard:hover {
-  background-color: #ffa500;
-  color: #292f3f;
+  background-color: #122557;
+  /* color: #292f3f; */
+}
+
+.selectedFriend {
+  background-color: #21242c;
 }
 
 .avatar {

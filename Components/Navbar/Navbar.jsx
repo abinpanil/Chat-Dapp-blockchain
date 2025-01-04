@@ -2,17 +2,12 @@ import React, { useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 import styles from "./Navbar.module.css"
 import { ChatAppContext } from '@/Context/ChatAppContext'
-import { navMenuItems } from '@/constants/constants'
 import { Error, Model } from "../index"
 import Toast from '../Toast/Toast'
 
 
 const Navbar = () => {
-
-  const [active, setActive] = useState(2)
-  const [openModel, setOpenModel] = useState(false)
-
-  const { account, userName, connectToWallet, createAccount, error, toast, setToast } = useContext(ChatAppContext)
+  const { account, userName, connectToWallet, createAccount, error, toast, setToast, modal, setModal } = useContext(ChatAppContext)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,25 +33,21 @@ const Navbar = () => {
         {!userName ?
           <button
             onClick={() => account === "" ?
-              connectToWallet()
-              // setOpenModel(true)
-              :
-              setOpenModel(true)}
+              connectToWallet() :
+              setModal(true)}
             className={`${styles.button} ${account === "" ? styles.connectButton : styles.createButton}`}
           >
             {""}
             <span>{account === "" ? "Connect Wallet" : "Create Account"}</span>
           </button> :
           <div className={styles.userDisplay}>
-            <span className={styles.userIcon}>👤</span>
             <span className={styles.userName}>{userName}</span>
           </div>
         }
       </div>
     </nav>
-    {openModel && <Model
-      openModel={setOpenModel}
-      title="Welcome"
+    {modal && <Model
+      openModel={setModal}
       functionName={createAccount}
       address={account}
     />}

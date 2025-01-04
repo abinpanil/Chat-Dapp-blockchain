@@ -1,7 +1,5 @@
 import { ERROR_TOAST, SUCCESS_TOAST } from '@/constants/constants'
 import { CheckIfWalletConnected, connectingWithContract, connectToWallet } from '@/utils/apiFeature'
-import { ethers } from 'ethers'
-import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 
 export const ChatAppContext = React.createContext()
@@ -17,8 +15,7 @@ export const ChatAppProvider = ({ children }) => {
     const [toast, setToast] = useState({ show: false, type: '', message: "" })
     const [currentUsername, setCurrentUsername] = useState("")
     const [currentUserAddress, setCurrentUserAddress] = useState("")
-
-    const router = useRouter()
+    const [modal, setModal] = useState(false)
 
     useEffect(() => {
         fetchData()
@@ -63,7 +60,8 @@ export const ChatAppProvider = ({ children }) => {
             const contract = await connectingWithContract()
             const getCreatedUser = await contract.createAccount(name)
             await getCreatedUser.wait()
-            window.location.reload()
+            fetchData()
+            setModal(false)
             setToast({ show: true, type: SUCCESS_TOAST, message: 'Account created successfully' })
         } catch (error) {
             console.log(error)
@@ -81,7 +79,7 @@ export const ChatAppProvider = ({ children }) => {
             const contract = await connectingWithContract()
             const addMyFriend = await contract.addFriend(accountAddress, name)
             await addMyFriend.wait()
-            window.location.reload()
+            fetchData()
         } catch (error) {
             console.log(error)
             setToast({ show: true, type: ERROR_TOAST, message: error?.reason || "Something went wrong" })
@@ -98,7 +96,7 @@ export const ChatAppProvider = ({ children }) => {
             const addMsg = await contract.sendMessage(address, msg)
             setLoading(true)
             await addMsg.wait()
-            window.location.reload()
+            fetchData()
         } catch (error) {
             console.log(error)
             setToast({ show: true, type: ERROR_TOAST, message: error?.reason || "Something went wrong" })
@@ -123,6 +121,7 @@ export const ChatAppProvider = ({ children }) => {
             readUserInfo,
             connectToWallet,
             CheckIfWalletConnected,
+            fetchData,
             account,
             userName,
             fiendList,
@@ -133,7 +132,9 @@ export const ChatAppProvider = ({ children }) => {
             currentUsername,
             currentUserAddress,
             toast,
-            setToast
+            setToast,
+            modal,
+            setModal
         }}>
             {children}
         </ChatAppContext.Provider>

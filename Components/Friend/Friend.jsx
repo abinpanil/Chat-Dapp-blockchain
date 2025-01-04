@@ -9,8 +9,10 @@ const Friend = () => {
   const [selectedFriend, setSelectedFriend] = useState([]);
 
   useEffect(() => {
-    setSelectedFriend(fiendList[0])
-  }, [fiendList])
+    if (fiendList.length > 0) {
+      setSelectedFriend(fiendList[fiendList.length - 1]);
+    }
+  }, [fiendList]);
 
   useEffect(() => {
     if (selectedFriend?.length) readMessage(selectedFriend?.pubkey)
@@ -19,7 +21,7 @@ const Friend = () => {
   return (
     <div className={styles.chatAppContainer}>
       <div className={styles.friendListContainer}>
-        <List friends={fiendList} setSelectedFriend={setSelectedFriend} />
+        <List friends={fiendList} setSelectedFriend={setSelectedFriend} selectedFriend={selectedFriend} />
       </div>
 
       <div className={styles.chatContainer}>

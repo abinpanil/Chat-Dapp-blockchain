@@ -4,61 +4,58 @@ import { ChatAppContext } from '@/Context/ChatAppContext'
 import { UserCard } from '@/Components'
 
 function allUser() {
-    const { userLists, addFriend, fiendList } = useContext(ChatAppContext)
+    const { userLists, addFriend, fiendList, account, loading } = useContext(ChatAppContext)
     const [searchTerm, setSearchTerm] = useState('')
     const [filteredUsers, setFilteredUsers] = useState([]);
+    const [selectedItem, setSelectedItem] = useState(null)
 
     useEffect(() => {
-        if (!searchTerm) setFilteredUsers(userLists)
-    }, [userLists, searchTerm])
-
-    const handleSearch = () => {
-        const filtered = userLists.filter(
-            (user) =>
-                user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                user.accountAddress.toLowerCase().includes(searchTerm.toLowerCase())
+        if (!searchTerm) return setFilteredUsers(userLists)
+        const filteredFriends = userLists.filter((friend) =>
+            friend.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
-        setFilteredUsers(filtered);
-    };
+        setFilteredUsers(filteredFriends)
+    }, [searchTerm, userLists])
+
+    const onSelect = (data, key) => {
+        console.log({ data, key })
+        setSelectedItem(key)
+        addFriend(data)
+    }
 
     return (
-        <div>
-            <div className={styles.container}>
-                <div className={styles.searchBar}>
-                    <input
-                        type="text"
-                        value={searchTerm}
-                        onChange={(e) => { setSearchTerm(e.target.value) }}
-                        placeholder="Search by username or address"
-                        className={styles.searchInput}
-                    />
-                    <button
-                        className={`${styles.searchButton} ${!searchTerm ? styles.disabledButton : styles.activeSearchButton}`}
-                        onClick={handleSearch}
-                        disabled={!searchTerm}>
-                        Search
-                    </button>
-                    <button
-                        className={`${styles.clearButton} ${!searchTerm ? styles.disabledButton : styles.activeClearButton}`}
-                        onClick={() => setSearchTerm('')}
-                        disabled={!searchTerm}>
-                        Clear
-                    </button>
-                </div>
-
-                <div className={styles.userList}>
-                    {filteredUsers.map((item, i) => (
-                        <UserCard
-                            key={i + 1}
-                            item={item}
-                            i={i}
-                            // isFriendExist={}
-                            addFriend={addFriend}
-                        />
-                    ))}
-                </div>
+        <div className={styles.container}>
+            <div className={styles.searchBar}>
+                <h1>Spacechain Directory</h1>
+                <input
+                    type="text"
+                    placeholder="Search by username or address"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className={styles.input}
+                />
             </div>
-        </div >
+            <div className={styles.userGrid}>
+                {filteredUsers.length > 0 ? (
+                    filteredUsers.map((item, i) => {
+                        const isFriendExist = fiendList.some(friend => friend?.pubkey?.toLowerCase() == item?.accountAddress?.toLowerCase());
+                        return (
+                            <UserCard
+                                key={i + 1}
+                                i={i}
+                                item={item}
+                                isFriendExist={isFriendExist}
+                                onSelect={onSelect}
+                                account={account}
+                                loading={loading && i === selectedItem}
+                            />
+                        );
+                    })
+                ) : (
+                    <p className={styles.noResults}>No users found.</p>
+                )}
+            </div>
+        </div>
     )
 }
 

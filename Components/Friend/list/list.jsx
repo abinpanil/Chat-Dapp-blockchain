@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import styles from './list.module.css'
 
-function list({ friends, setSelectedFriend }) {
+function list({ friends, setSelectedFriend, selectedFriend }) {
     const [searchQuery, setSearchQuery] = useState("");
     const [filteredFriends, setFilteredFriends] = useState(friends)
 
 
     useEffect(() => {
-        if (!searchQuery) return setFilteredFriends(friends)
+        if (!searchQuery) return setFilteredFriends([...friends].reverse());
         const filteredFriends = friends.filter((friend) =>
             friend.name.toLowerCase().includes(searchQuery.toLowerCase())
         );
@@ -28,7 +28,8 @@ function list({ friends, setSelectedFriend }) {
             <div className={styles.listContainer}>
                 {filteredFriends.length > 0 ? (
                     filteredFriends.map((friend, i) => (
-                        <div key={i + 1} className={styles.friendCard}
+                        <div key={i + 1}
+                            className={`${styles.friendCard} ${selectedFriend?.pubkey?.toLowerCase() == friend?.pubkey?.toLowerCase() ? styles.selectedFriend : ''}`}
                             onClick={() => setSelectedFriend(friend)}>
                             <img
                                 src={friend.avatar || "https://via.placeholder.com/40"}
