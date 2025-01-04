@@ -33,11 +33,15 @@ const Navbar = () => {
 
   return (<>
     <nav className={styles.navbar}>
-      <Link className={styles.logo} href={'/'}>BlockChat</Link>
+      <Link className={styles.logo} href={'/'}>ChainTalk</Link>
       <div className={styles.navRight}>
         {!userName ?
           <button
-            onClick={() => account === "" ? connectToWallet() : setOpenModel(true)}
+            onClick={() => account === "" ?
+              connectToWallet()
+              // setOpenModel(true)
+              :
+              setOpenModel(true)}
             className={`${styles.button} ${account === "" ? styles.connectButton : styles.createButton}`}
           >
             {""}

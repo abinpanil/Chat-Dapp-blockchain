@@ -5,7 +5,7 @@
   align-items: center;
   padding: 20px 40px;
   color: #fff;
-  position: fixed;
+  /* position: fixed; */
   height: 100px;
   background-color: rgba(10, 18, 57, 0.95);
   z-index: 99999;
@@ -70,12 +70,15 @@
 }
 
 .connectButton {
-  background-color: #2196f3;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #2196f3;
 }
 
 .connectButton:hover {
   background-color: #1b7dcc;
-  transform: scale(1.05);
+  letter-spacing: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
 }
 
 .createButton {

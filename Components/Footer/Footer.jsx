@@ -1,10 +1,13 @@
 import React from "react";
 import styles from "./Footer.module.css";
+import Link from "next/link";
 
 const Footer = () => {
     return (
         <footer className={styles.footer}>
-            <div className={styles.appName}>BlockChat</div>
+            <Link href={'/'}>
+                <div className={styles.appName}>ChainTalk</div>
+            </Link>
             <nav className={styles.nav}>
                 <a href="#about" className={styles.link}>
                     About

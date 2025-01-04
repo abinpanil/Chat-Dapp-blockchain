@@ -7,7 +7,7 @@ function ChatApp() {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <h1 className={styles.title}>BlockChat</h1>
+        <h1 className={styles.title}>Unleash the Future of Communication!</h1>
         <p className={styles.subheading}>
           Secure, decentralized communication powered by Ethereum. Connect with others while keeping your conversations private and tamper-proof.
         </p>

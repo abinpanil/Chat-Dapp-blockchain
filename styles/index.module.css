@@ -1,7 +1,7 @@
 .container {
   background-color: rgb(10, 18, 57);
   color: white;
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - 160px);
   display: flex;
   justify-content: center;
   align-items: center;

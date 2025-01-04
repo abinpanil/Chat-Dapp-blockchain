@@ -1,73 +1,86 @@
-/* Error Page */
-.errorPage {
+.container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  background: linear-gradient(rgba(10, 18, 57, 0.95), rgba(10, 18, 57, 0.95)),
+    url("../../images/error_con.jpg") no-repeat center/cover;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.7);
   z-index: 1000;
-  animation: fadeIn 0.5s ease-out;
 }
 
-.errorContent {
-  background-color: #2c3742; /* Darker shade to match the app background */
-  border-radius: 16px;
-  padding: 40px;
-  max-width: 450px;
-  width: 90%;
+.content {
   text-align: center;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-  animation: slideUp 0.5s ease-out;
+  z-index: 2;
+  animation: fadeIn 1.5s ease-in-out;
+  letter-spacing: 2px;
+}
+
+.errorCode {
+  font-size: 50px;
+  font-weight: bold;
+  color: rgba(248, 53, 79, 0.9);
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.errorMessage {
+  font-size: 36px;
+  margin: 10px 0;
+  color: hsla(0, 0%, 100%, 0.9);
+  text-transform: uppercase;
+}
+
+.description {
+  font-size: 18px;
+  margin: 15px 0;
+  color: hsla(0, 0%, 100%, 0.7);
+}
+
+.actions {
+  margin-top: 20px;
+}
+
+.homeButton {
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: rgba(248, 53, 79, 0.9);
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  text-transform: uppercase;
+  box-shadow: 0 4px 15px rgba(248, 53, 79, 0.4);
+  transition: all 0.3s ease-in-out;
+}
+
+.homeButton:hover {
+  background-color: rgba(248, 53, 79, 1);
+  box-shadow: 0 6px 20px rgba(248, 53, 79, 0.6);
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.5;
+  filter: blur(10px);
+  background: url("../../images/error_con.jpg") no-repeat center/cover;
 }
 
 @keyframes fadeIn {
-  from {
+  0% {
     opacity: 0;
+    transform: translateY(20px);
   }
-  to {
+  100% {
     opacity: 1;
-  }
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(30px);
-    opacity: 0;
-  }
-  to {
     transform: translateY(0);
-    opacity: 1;
   }
-}
-
-.title {
-  font-size: 2rem;
-  color: #f1f5f9; /* Light text */
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.message {
-  font-size: 1.2rem;
-  color: #d1d8e0; /* Light grey message text */
-  margin-bottom: 30px;
-}
-
-.reloadButton {
-  padding: 12px 20px;
-  font-size: 1.1rem;
-  color: #fff;
-  background-color: #1d76d1; /* Blue for the reload button */
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.reloadButton:hover {
-  background-color: #155b8a; /* Darker blue on hover */
 }
