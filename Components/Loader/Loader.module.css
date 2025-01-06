@@ -1,0 +1,128 @@
+.loadingContainer {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to bottom, #0a1239f2, #020824);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  z-index: 99999;
+}
+
+.background {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(#ffffff22, transparent, transparent);
+  animation: twinkling 10s infinite linear;
+}
+
+@keyframes twinkling {
+  0% {
+    transform: translate(-50%, -50%);
+  }
+  100% {
+    transform: translate(50%, 50%);
+  }
+}
+
+.cube {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  transform-style: preserve-3d;
+  animation: spinCube 6s infinite linear;
+  z-index: 2;
+}
+
+.face {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Add transformations for each face */
+.face1 {
+  transform: rotateY(0deg) translateZ(50px);
+}
+.face2 {
+  transform: rotateY(90deg) translateZ(50px);
+}
+.face3 {
+  transform: rotateY(180deg) translateZ(50px);
+}
+.face4 {
+  transform: rotateY(-90deg) translateZ(50px);
+}
+.face5 {
+  transform: rotateX(90deg) translateZ(50px);
+}
+.face6 {
+  transform: rotateX(-90deg) translateZ(50px);
+}
+
+.loadingText {
+  margin-top: 40px;
+  font-size: 1.5rem;
+  color: #ffffff;
+  font-family: "Arial", sans-serif;
+  text-align: center;
+  z-index: 2;
+}
+
+.typingEffect {
+  font-size: 1.5rem;
+  color: #ffffff;
+  font-family: "Courier New", Courier, monospace;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #ffffff;
+  width: 55ch;
+  animation: typing 4s steps(55, end) infinite,
+    blink 0.5s step-end infinite alternate;
+  z-index: 2;
+  margin-top: 80px;
+}
+
+@keyframes typing {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 55ch;
+  }
+}
+
+@keyframes blink {
+  from {
+    border-color: transparent;
+  }
+  to {
+    border-color: #ffffff;
+  }
+}
+
+@keyframes spinCube {
+  from {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+  to {
+    transform: rotateX(360deg) rotateY(360deg);
+  }
+}
+
+@keyframes rotateOrbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

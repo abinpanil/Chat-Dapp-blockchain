@@ -38,7 +38,7 @@ function list({ friends, setSelectedFriend, selectedFriend }) {
                             />
                             <div className={styles.friendDetails}>
                                 <p className={styles.friendName}>{friend?.name}</p>
-                                <p className={styles.friendAddress}>{friend?.pubkey?.slice(0, 25)}</p>
+                                <p className={styles.friendAddress}>{`${friend?.pubkey?.slice(0, 10)}...`}</p>
                             </div>
                         </div>
                     ))

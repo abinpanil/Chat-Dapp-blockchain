@@ -3,6 +3,7 @@
   background: linear-gradient(#0a123975, #0a1239),
     url("../images/users_bg.jpg") center / cover no-repeat;
   max-height: calc(100vh - 60px);
+  height: calc(100vh - 60px);
   padding-top: 130px;
 }
 

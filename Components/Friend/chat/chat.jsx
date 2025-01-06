@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from './chat.module.css'
+import { convertTime } from '@/utils/apiFeature';
 
 function chat({ friend, message, sendMsg, account }) {
     const [messages, setMessages] = useState([]);
@@ -35,11 +36,13 @@ function chat({ friend, message, sendMsg, account }) {
 
                     <div className={styles.chatArea}>
                         {messages.map((msg, i) => {
+                            console.log(msg)
                             return <div
                                 key={i + 1}
                                 className={`${styles.message} ${msg?.sender.toLowerCase() != account.toLowerCase() ? styles.friendMessage : styles.myMessage}`}
                             >
                                 {msg.msg}
+                                {/* {`Time: ${convertTime(msg.timestamp)}`} */}
                             </div>
                         })}
                     </div>

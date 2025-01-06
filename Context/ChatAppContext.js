@@ -16,6 +16,7 @@ export const ChatAppProvider = ({ children }) => {
     const [currentUsername, setCurrentUsername] = useState("")
     const [currentUserAddress, setCurrentUserAddress] = useState("")
     const [modal, setModal] = useState(false)
+    const [initialLoad, setInitialLoad] = useState(true)
 
     useEffect(() => {
         fetchData()
@@ -23,6 +24,7 @@ export const ChatAppProvider = ({ children }) => {
 
     const fetchData = async () => {
         try {
+            setInitialLoad(true)
             const contract = await connectingWithContract()
             const connectAccount = await connectToWallet()
             setAccount(connectAccount)
@@ -38,6 +40,10 @@ export const ChatAppProvider = ({ children }) => {
         } catch (error) {
             console.log(error)
             if (error.reason !== 'user not fount') setError("Please install and connect your wallet")
+        } finally {
+            setTimeout(() => {
+                setInitialLoad(false)
+            }, 3500);
         }
     }
 
@@ -134,7 +140,8 @@ export const ChatAppProvider = ({ children }) => {
             toast,
             setToast,
             modal,
-            setModal
+            setModal,
+            initialLoad
         }}>
             {children}
         </ChatAppContext.Provider>
