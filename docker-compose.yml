@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  blockchain:
+    build:
+      context: .
+    container_name: blockchain-app
+    ports:
+      - "8545:8545"
+      - "3000:3000"
+    volumes:
+      - .:/app
+    networks:
+      - blockchain-network
+    command: sh -c "npx hardhat node & npm run dev"
+
+networks:
+  blockchain-network:
+    driver: bridge

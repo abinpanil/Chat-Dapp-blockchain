@@ -1,40 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Blockchain Chat Application
+
+A decentralized chat application built on the Ethereum blockchain, featuring a Next.js frontend and Hardhat for smart contract development and deployment.
+
+## Features
+
+- **Decentralized Chat**: Enjoy privacy and ownership of messages through blockchain technology.
+- **Futuristic Design**: A visually appealing, space-themed UI with animations.
+- **Secure Transactions**: Messages and interactions are secured by Ethereum smart contracts.
+
+## Tech Stack
+
+- **Blockchain**: Ethereum
+- **Frontend**: [Next.js](https://nextjs.org/)
+- **Smart Contract Development**: [Hardhat](https://hardhat.org/)
+- **Containerization**: Docker
+
+## Prerequisites
+
+- Docker
+- Docker Compose
+- MetaMask browser extension (for interacting with the Ethereum network)
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the Repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/abinpanil/Chat-Dapp-blockchain.git
+cd Chat-Dapp-blockchain
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install MetaMask
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+MetaMask is a browser extension that allows you to interact with the Ethereum blockchain.
+- Install MetaMask: MetaMask Extension
+- Create or import a wallet.
+- Connect MetaMask to the network (e.g., local testnet or specified network).
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### 3. Use Test Accounts
+Use the provided test accounts to interact with the application.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+### 4. Run the Application
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Run the following command to build and start all services (frontend, backend, and blockchain):
+```bash
+ docker-compose up --build 
+ ```
 
-## Learn More
+### 5. Access the Application
 
-To learn more about Next.js, take a look at the following resources:
+Once the containers are running:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+- Frontend: Visit http://localhost:3000 in browser.
+- Blockchain Node: Ensure MetaMask or Ethereum wallet is connected to the correct network (e.g., a local testnet).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 6. Stopping the Application
 
-## Deploy on Vercel
+To stop all running containers, use:
+```bash
+docker-compose down  
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Smart Contract Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+Contracts are automatically deployed using Hardhat when run docker-compose up.
