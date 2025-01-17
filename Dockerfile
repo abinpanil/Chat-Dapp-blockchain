@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:21.6.1
 
 WORKDIR /app
 
@@ -10,4 +10,7 @@ COPY . .
 
 EXPOSE 8545 3000
 
-CMD ["sh", "-c", "npx hardhat node &  npm run dev"]
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
+CMD ["/start.sh"]

@@ -12,7 +12,6 @@ services:
       - .:/app
     networks:
       - blockchain-network
-    command: sh -c "npx hardhat node & npm run dev"
 
 networks:
   blockchain-network:
