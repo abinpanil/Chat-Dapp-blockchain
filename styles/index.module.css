@@ -7,8 +7,6 @@
   align-items: center;
   text-align: center;
   font-family: Roboto, sans-serif;
-  background: linear-gradient(#0a123975, #0a1239),
-    url("../images/home_bg.jpg") center / cover no-repeat;
 }
 
 .header {
