@@ -51,7 +51,7 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           port: 22
           source: "docker-compose.yml"  # Replace with the path to your local files
-          target: "/home/${{ secrets.EC2_USER }}/docker-compose.yml"  # Replace with the path on the remote host
+          target: "/home/${{ secrets.EC2_USER }}"  # Replace with the path on the remote host
                   
       # Step 4: Deploy Docker Compose on EC2
       - name: Deploy Docker Compose on EC2
@@ -63,9 +63,6 @@ jobs:
           port: 22
           command_timeout: 30m
           script: |
-            echo "Pulling the latest Docker image..."
-            docker pull ${{ secrets.DOCKER_USERNAME }}/blockchain-app:latest
-
             echo "Changing directory to user home..."
             cd /home/${{ secrets.EC2_USER }}
 
@@ -74,6 +71,9 @@ jobs:
 
             echo "Removing old Docker images and volumes..."
             docker system prune -af --volumes
+
+            echo "Pulling the latest Docker image..."
+            docker pull ${{ secrets.DOCKER_USERNAME }}/blockchain-app:latest
 
             echo "Starting up new containers..."
             docker-compose up -d
