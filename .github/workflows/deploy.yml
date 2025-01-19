@@ -45,7 +45,7 @@ jobs:
       # Step 2: Copy Docker Compose Files to EC2
       - name: Copy Compose Files to EC2
         uses: appleboy/ssh-action@v0.1.10
-         with:
+        with:
           host: ${{ secrets.EC2_HOST }}
           key: ${{ secrets.EC2_KEY }}
           username: ${{ secrets.EC2_USER }}
@@ -56,7 +56,7 @@ jobs:
       # Step 4: Deploy on EC2
       - name: Deploy on EC2
         uses: appleboy/ssh-action@v0.1.10
-         with:
+        with:
           host: ${{ secrets.EC2_HOST }}
           key: ${{ secrets.EC2_KEY }}
           username: ${{ secrets.EC2_USER }}
