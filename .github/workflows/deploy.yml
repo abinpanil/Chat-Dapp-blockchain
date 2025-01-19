@@ -44,17 +44,29 @@ jobs:
 
       # Step 2: Copy Docker Compose Files to EC2
       - name: Copy Compose Files to EC2
-        run: |
-          scp -o StrictHostKeyChecking=no -i ${{ secrets.EC2_KEY }} docker-compose.yml ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/${{ secrets.EC2_USER }}/docker-compose.yml
-
+        uses: appleboy/ssh-action@v0.1.10
+         with:
+          host: ${{ secrets.EC2_HOST }}
+          key: ${{ secrets.EC2_KEY }}
+          username: ${{ secrets.EC2_USER }}
+          port: 22
+          source: "docker-compose.yml"  # Replace with the path to your local files
+          target: "/home/${{ secrets.EC2_USER }}/"  # Replace with the path on the remote host
+                  
       # Step 4: Deploy on EC2
       - name: Deploy on EC2
-        run: |
-          ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_KEY }} ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
-            set -e
+        uses: appleboy/ssh-action@v0.1.10
+         with:
+          host: ${{ secrets.EC2_HOST }}
+          key: ${{ secrets.EC2_KEY }}
+          username: ${{ secrets.EC2_USER }}
+          port: 22
+          command_timeout: 30m
+          script: |
             echo "Pulling the latest Docker image..."
             docker pull ${{ secrets.DOCKER_USERNAME }}/blockchain-app:latest
 
+            echo "Changing directory to user home..."
             cd /home/${{ secrets.EC2_USER }}
 
             echo "Shutting down existing containers..."
@@ -67,4 +79,3 @@ jobs:
             docker-compose up -d
 
             echo "Deployment complete!"
-          EOF
