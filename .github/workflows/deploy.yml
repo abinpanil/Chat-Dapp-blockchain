@@ -45,8 +45,17 @@ jobs:
         # Step 2: Add SSH Key
       - name: Add SSH Key
         run: |
+          # Ensure the .ssh directory exists
+          mkdir -p ~/.ssh
+
+          # Create the private key file using GitHub secret
           echo "${{ secrets.EC2_KEY }}" > ~/.ssh/ec2_key.pem
+
+          # Set the correct permissions for the private key
           chmod 600 ~/.ssh/ec2_key.pem
+
+          # Optionally, you can add EC2's host to known hosts to avoid SSH warnings
+          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
       # Step 2: Copy Docker Compose Files to EC2
       - name: Copy Compose Files to EC2
