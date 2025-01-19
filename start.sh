@@ -13,5 +13,12 @@ sleep 5
 
 mv artifacts/contracts/ChatApp.sol/ChatApp.json Context/
 
-# Finally, start the Next.js development server
-npm run dev
+# Build the Next.js app
+echo "Building the Next.js app..."
+npm run build &
+
+sleep 80
+
+# Start the Next.js production server
+echo "Starting the Next.js production server..."
+npm run start
