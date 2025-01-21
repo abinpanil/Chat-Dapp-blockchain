@@ -1,11 +1,22 @@
 //0x5FbDB2315678afecb367f032d93F642f64180aa3
-import chatAppJSON from "./ChatApp.json"
+import chatAppJSON from "./ChatApp.json";
 
-export const ChatAppAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+export const ChatAppAddress = process.env.NEXT_PUBLIC_DEPLOY_ADDRESS
 
 export const ChatAppABI = chatAppJSON.abi
 
 const networks = {
+    polygon_amoy: {
+        chainId: `0x${Number(80002).toString(16)}`,
+        chainName: "Polygon Amoy",
+        nativeCurrency: {
+            name: "pol",
+            symbol: "POL",
+            decimals: 18
+        },
+        rpcUrls: ["https://rpc-amoy.polygon.technology"],
+        blockExplorerUrls: ["https://amoy.polygonscan.com"]
+    },
     localhost: {
         chainId: `0x${Number(31337).toString(16)}`,
         chainName: "localhost",
@@ -60,6 +71,6 @@ const changeNetwork = async ({ networkName }) => {
 }
 
 export const handleNetworkSwitch = async () => {
-    const networkName = "localhost"
+    const networkName = "polygon_amoy"
     await changeNetwork({ networkName })
 }
