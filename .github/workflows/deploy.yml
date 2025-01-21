@@ -83,6 +83,6 @@ jobs:
             )
             echo "$ENV_VARS" > .env
 
-            docker-compose up -d --remove-orphans
+            docker-compose up -d
 
             echo "Deployment complete!"
