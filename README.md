@@ -33,7 +33,7 @@ cd Chat-Dapp-blockchain
 ### 2. Install MetaMask
 
 MetaMask is a browser extension that allows you to interact with the Ethereum blockchain.
-- Install MetaMask: MetaMask Extension
+- Install MetaMask: [MetaMask Extension](https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn)
 - Create or import a wallet.
 - Connect MetaMask to the network (e.g., local testnet or specified network).
 
