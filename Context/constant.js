@@ -2,6 +2,7 @@
 import chatAppJSON from "./ChatApp.json";
 
 export const ChatAppAddress = process.env.NEXT_PUBLIC_DEPLOY_ADDRESS
+console.log({ NEXT_PUBLIC_DEPLOY_ADDRESS: process.env.NEXT_PUBLIC_DEPLOY_ADDRESS })
 
 export const ChatAppABI = chatAppJSON.abi
 
