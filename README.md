@@ -10,10 +10,10 @@ A decentralized chat application built on the Ethereum blockchain, featuring a N
 
 ## Tech Stack
 
-- **Blockchain**: Ethereum
+- **Blockchain**: [Ethereum](https://ethereum.org/en/)
 - **Frontend**: [Next.js](https://nextjs.org/)
 - **Smart Contract Development**: [Hardhat](https://hardhat.org/)
-- **Containerization**: Docker
+- **Containerization**: [Docker](https://www.docker.com/)
 
 ## Prerequisites
 
