@@ -32,7 +32,7 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           port: 22
           source: |
-            .next/**  # Built Next.js files
+            .next  # Built Next.js files
             package.json
             package-lock.json
           target: "/home/${{ secrets.EC2_USER }}/nextjs-app"
