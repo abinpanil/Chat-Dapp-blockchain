@@ -13,6 +13,7 @@ A decentralized chat application built on the Ethereum blockchain, featuring a N
 - **Blockchain**: [Ethereum](https://ethereum.org/en/)
 - **Frontend**: [Next.js](https://nextjs.org/)
 - **Smart Contract Development**: [Hardhat](https://hardhat.org/)
+- **3D Graphics**: [Three.js](https://threejs.org/)  
 - **Containerization**: [Docker](https://www.docker.com/)
 
 ## Prerequisites
