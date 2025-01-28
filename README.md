@@ -39,7 +39,7 @@ MetaMask is a browser extension that allows you to interact with the Ethereum bl
 - Connect MetaMask to the network (e.g., local testnet or specified network).
 
 ### 3. Use Test Accounts
-Use the provided test accounts to interact with the application.
+Use test accounts to interact with the application.
 
 ### 4. Run the Application
 
