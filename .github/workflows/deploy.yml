@@ -24,7 +24,7 @@ jobs:
         
       - name: Archive Build Files
         run: |
-          tar -czvf deploy.tar.gz .next package.json package-lock.json .env public pages styles
+          tar -czvf deploy.tar.gz .next package.json package-lock.json
           
       # Step 3: Upload Build Files and Environment Variables to EC2
       - name: Upload Build Files to EC2
