@@ -35,10 +35,6 @@ jobs:
             .next
             package.json
             package-lock.json
-            .env
-            public
-            pages
-            styles
           target: "/home/${{ secrets.EC2_USER }}/nextjs-app"
 
       # Step 4: Start App with PM2 and Use Environment Variables
