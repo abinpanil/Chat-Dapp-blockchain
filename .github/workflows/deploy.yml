@@ -22,23 +22,23 @@ jobs:
           npm run build
           ls -a
         
-
+      - name: Archive Build Files
+        run: |
+          tar -czvf deploy.tar.gz .next package.json package-lock.json .env public pages styles
+          
       # Step 3: Upload Build Files and Environment Variables to EC2
-      - name: Deploy Build and Environment Variables to EC2
+      - name: Upload Build Files to EC2
         uses: appleboy/scp-action@v0.1.6
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           port: 22
-          source:  |
-            .next
-            package.json
-            package-lock.json
+          source: "deploy.tar.gz"
           target: "/home/${{ secrets.EC2_USER }}/nextjs-app"
 
       # Step 4: Start App with PM2 and Use Environment Variables
-      - name: Start App with PM2 on EC2
+      - name: Extract and Start App on EC2
         uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{ secrets.EC2_HOST }}
@@ -49,22 +49,24 @@ jobs:
             echo "Navigating to the app directory..."
             cd /home/${{ secrets.EC2_USER }}/nextjs-app
 
-            echo "Creating .env file from GitHub Secrets..."
+            echo "Extracting the build files..."
+            tar -xzvf deploy.tar.gz
+            rm deploy.tar.gz
+
+            echo "Creating .env file..."
             cat <<EOF > .env
             NEXT_PUBLIC_PRIVATE_KEY=${{ secrets.NEXT_PUBLIC_PRIVATE_KEY }}
             NEXT_PUBLIC_DEPLOY_ADDRESS=${{ secrets.NEXT_PUBLIC_DEPLOY_ADDRESS }}
             EOF
 
-            echo "Installing dependencies with legacy peer deps..."
+            echo "Installing dependencies..."
             npm ci --legacy-peer-deps
 
-            echo "Installing PM2 globally..."
+            echo "Installing PM2..."
             npm install -g pm2
 
-            echo "Starting the Next.js application with PM2..."
-            pm2 start npm --name "nextjs-app" -- run start
-
-            echo "Saving PM2 process list..."
+            echo "Restarting the Next.js application with PM2..."
+            pm2 restart nextjs-app || pm2 start npm --name "nextjs-app" -- run start
             pm2 save
 
-            echo "Deployment and app startup complete!"
+            echo "Deployment complete!"
