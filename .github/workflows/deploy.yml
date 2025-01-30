@@ -31,7 +31,14 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           port: 22
-          source: ".next/**/*"  # Built Next.js files
+          source:  |
+            .next
+            package.json
+            package-lock.json
+            .env
+            public
+            pages
+            styles
           target: "/home/${{ secrets.EC2_USER }}/nextjs-app"
 
       # Step 4: Start App with PM2 and Use Environment Variables
